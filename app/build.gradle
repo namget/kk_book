@@ -47,7 +47,7 @@ dependencies {
     implementation "com.google.android.material:material:$androidXVersion"
 
     //constraint
-    def constraintVersion = "2.0.0-alpha3"
+    def constraintVersion = "2.0.0-beta2"
     implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
 
     //glide
@@ -60,10 +60,20 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:$lifecycleVersion"
 
     //rx
-    def rxAndroidVersion = "2.1.0"
+    def rxAndroidVersion = "2.1.1"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-
     def rxJavaVersion = '2.2.10'
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+
+    //retrofit
+    def retrofitVersion = "2.4.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+    //okhttp
+    def httpVersion = "3.8.0"
+    implementation "com.squareup.okhttp3:okhttp:$httpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$httpVersion"
 
 }

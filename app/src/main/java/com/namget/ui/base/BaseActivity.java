@@ -15,6 +15,6 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, onLayoutId());
-        binding.setLifecycleOwner(this);
+        binding.setLifecycleOwner(\);
     }
 }
