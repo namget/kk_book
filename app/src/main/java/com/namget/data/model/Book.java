@@ -5,19 +5,19 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Book {
-    String title;
-    String contents;
-    String url;
-    String isbn;
-    String datetime;
-    List<String> author;
-    String publisher;
-    List<String> translators;
-    int price;
+    private String title;
+    private String contents;
+    private String url;
+    private String isbn;
+    private String datetime;
+    private List<String> author;
+    private String publisher;
+    private List<String> translators;
+    private int price;
     @SerializedName("sale_price")
-    int salePrice;
-    String thumbnail;
-    String status;
+    private int salePrice;
+    private String thumbnail;
+    private String status;
 
     public String getTitle() {
         return title;

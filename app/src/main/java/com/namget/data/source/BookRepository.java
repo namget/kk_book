@@ -1,6 +1,9 @@
 package com.namget.data.source;
 
 import com.namget.data.model.Book;
+import com.namget.data.model.BookResponse;
+
+import java.util.ArrayList;
 
 import io.reactivex.Single;
 
@@ -16,7 +19,7 @@ public class BookRepository implements BookDataSource {
     }
 
     @Override
-    public Single<Book> searchBook(String query, int page) {
+    public Single<BookResponse> searchBook(String query, int page) {
         return bookRemoteDataSource.searchBook(query,page);
     }
 }

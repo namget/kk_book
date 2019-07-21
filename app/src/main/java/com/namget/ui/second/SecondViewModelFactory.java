@@ -10,7 +10,7 @@ public class SecondViewModelFactory implements ViewModelProvider.Factory {
 
     BookDataSource bookRepository;
 
-    public SecondViewModelFactory(BookDataSource bookRepository) {
+    SecondViewModelFactory(BookDataSource bookRepository) {
         this.bookRepository = bookRepository;
     }
 
@@ -18,6 +18,6 @@ public class SecondViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new SecondViewModel();
+        return (T) new SecondViewModel(bookRepository);
     }
 }

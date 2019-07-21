@@ -1,16 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <variable
+            name="book"
+            type="com.namget.data.model.Book" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/bookImg"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:glideImage="@{book.thumbnail}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titleTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:filteredText="@{book.title}"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/bookImg"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/priceTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/book_price"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@id/titleTxt"
+            app:layout_constraintTop_toBottomOf="@id/titleTxt" />
+
+        <TextView
+            android:id="@+id/priceContentTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30sp"
+            android:text="@{@string/won(book.price)}"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/priceTxt"
+            app:layout_constraintLeft_toRightOf="@id/priceTxt"
+            app:layout_constraintTop_toTopOf="@id/priceTxt" />
+
+
+        <TextView
+            android:id="@+id/salePriceTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/book_sale_price"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@id/titleTxt"
+            app:layout_constraintTop_toBottomOf="@id/priceTxt" />
+
+        <TextView
+            android:id="@+id/salePriceContentTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/won(book.salePrice)}"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/salePriceTxt"
+            app:layout_constraintLeft_toLeftOf="@id/priceContentTxt"
+            app:layout_constraintTop_toTopOf="@id/salePriceTxt" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

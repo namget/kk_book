@@ -2,5 +2,8 @@
     <string name="app_name">kakaoBankCodingTest</string>
     <string name="search">Search</string>
     <string name="search_hint">검색어를 입력하세요</string>
-    <string name="left_money">잔액 : </string>
+    <string name="left_money">잔액 :</string>
+    <string name="book_price">정가 :</string>
+    <string name="book_sale_price">할인가 :</string>
+    <string name="won">%s원</string>
 </resources>

@@ -1,15 +1,19 @@
 package com.namget.ui.first;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.namget.R;
 import com.namget.data.source.BookDataSource;
 import com.namget.data.source.BookRepository;
 import com.namget.databinding.ActivityFirstBinding;
 import com.namget.ui.base.BaseActivity;
+import com.namget.ui.second.SecondActivity;
+import com.namget.util.Constant;
 
 public class FirstActivity extends BaseActivity<ActivityFirstBinding> {
 
@@ -37,9 +41,9 @@ public class FirstActivity extends BaseActivity<ActivityFirstBinding> {
         setSupportActionBar(binding.toolbar);
     }
 
-    private void initViewModel(){
+    private void initViewModel() {
         firstViewModelFactory = new FirstViewModelFactory(bookRepository);
-        firstViewModel = ViewModelProviders.of(this,firstViewModelFactory).get(FirstViewModel.class);
+        firstViewModel = ViewModelProviders.of(this, firstViewModelFactory).get(FirstViewModel.class);
     }
 
     @Override
@@ -52,7 +56,10 @@ public class FirstActivity extends BaseActivity<ActivityFirstBinding> {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+                intent.putExtra(Constant.DATA, query);
+                startActivity(intent);
+                return true;
             }
 
             @Override

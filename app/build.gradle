@@ -39,7 +39,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //appcompat
-    def androidXAppCompatVersion = "1.0.2"
+    def androidXAppCompatVersion = "1.1.0-alpha04"
     implementation "androidx.appcompat:appcompat:$androidXAppCompatVersion"
 
     def androidXVersion = "1.0.0"
@@ -57,7 +57,6 @@ dependencies {
     //lifecycle
     def lifecycleVersion = "2.0.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-    annotationProcessor "android.arch.lifecycle:compiler:$lifecycleVersion"
 
     //rx
     def rxAndroidVersion = "2.1.1"

@@ -29,7 +29,7 @@ public class NetworkRemote {
     public ApiService getApiService() {
         if (apiService == null) {
             Retrofit retrofit;
-            final String baseURL = "dapi.kakao.com";
+            final String baseURL = "https://dapi.kakao.com";
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 
             OkHttpClient client = new OkHttpClient.Builder()

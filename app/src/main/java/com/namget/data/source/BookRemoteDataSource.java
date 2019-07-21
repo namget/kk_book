@@ -1,6 +1,7 @@
 package com.namget.data.source;
 
 import com.namget.data.model.Book;
+import com.namget.data.model.BookResponse;
 import com.namget.data.remote.NetworkRemote;
 
 import io.reactivex.Single;
@@ -18,10 +19,10 @@ public class BookRemoteDataSource implements BookDataSource {
     }
 
     @Override
-    public Single<Book> searchBook(String query, int page) {
+    public Single<BookResponse> searchBook(String query, int page) {
         return NetworkRemote.getInstance()
                 .getApiService()
-                .searchBook("미움받을용기", 1)
+                .searchBook("accuracy", "title", 10, query, page)
                 .subscribeOn(Schedulers.newThread());
     }
 }
