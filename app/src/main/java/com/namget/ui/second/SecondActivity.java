@@ -15,6 +15,7 @@ import com.namget.ui.base.BaseActivity;
 import com.namget.ui.second.adapter.SecondAdapter;
 import com.namget.util.Constant;
 
+
 public class SecondActivity extends BaseActivity<ActivitySecondBinding> {
 
     private SecondViewModel secondViewModel;

@@ -3,6 +3,8 @@ package com.namget.data.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Book implements Parcelable {
@@ -80,5 +82,12 @@ public class Book implements Parcelable {
         }
     };
 
-
+    @Override
+    public boolean equals(Object obj) {
+       if (obj instanceof Book){
+            Book book = (Book) obj;
+           return (this.title.equals(book.title) && this.price == book.price && this.salePrice == book.salePrice);
+       }
+       return false;
+    }
 }

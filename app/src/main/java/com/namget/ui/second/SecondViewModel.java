@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.namget.data.model.Book;
-import com.namget.data.model.Meta;
 import com.namget.data.source.BookDataSource;
 import com.namget.ui.base.DisposableViewModel;
 import com.namget.util.LogUtil;
