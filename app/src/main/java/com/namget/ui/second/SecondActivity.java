@@ -68,7 +68,7 @@ public class SecondActivity extends BaseActivity<ActivitySecondBinding> {
                 else if (recyclerView.canScrollVertically(-1)) {
                     if (recyclerView.getAdapter() != null && recyclerView.getAdapter().getItemCount() != 0) {
                         if (secondViewModel.getIsEnd().getValue() != null && !secondViewModel.getIsEnd().getValue()) {
-                            secondViewModel.searchList(query, page++);
+                            secondViewModel.searchList(query, ++page);
                         }
                     }
                 }

@@ -21,18 +21,20 @@ public class SecondViewModel extends DisposableViewModel {
     public LiveData<ArrayList<Book>> getBookList() {
         return bookList;
     }
+
     private final MutableLiveData<Boolean> isEnd = new MutableLiveData<>();
+
     public LiveData<Boolean> getIsEnd() {
         return isEnd;
     }
 
     private MutableLiveData<Book> ItemClicked = new MutableLiveData<>();
+
     public LiveData<Book> getItemClicked() {
         return ItemClicked;
     }
 
     private ArrayList<Book> bookDatas = new ArrayList<>();
-
 
 
     public SecondViewModel(BookDataSource bookRepository) {
@@ -48,6 +50,7 @@ public class SecondViewModel extends DisposableViewModel {
                         book.setTitle(setFilteredTitle(book.getTitle()));
                         book.setSalePrice(setFilteredPrice(book.getPrice(), book.getSalePrice()));
                         books.add(book);
+                        LogUtil.e("book", "book : " + book.getTitle());
                     }
                     bookResponse.setResults(books);
                     return bookResponse;
@@ -82,7 +85,7 @@ public class SecondViewModel extends DisposableViewModel {
     }
 
     private int setFilteredPrice(int price, int saledPrice) {
-        LogUtil.e("test", "price : " + (price * 0.9) + "price2 : " + saledPrice + "price3 : " + ((price * 0.9) - saledPrice));
+//        LogUtil.e("test", "price : " + (price * 0.9) + "price2 : " + saledPrice + "price3 : " + ((price * 0.9) - saledPrice));
         //90퍼 - 판매가격 > 0 => price의 90퍼도 안된다.
         if ((price * 0.9) - saledPrice > 0 && saledPrice > 0) {
             saledPrice *= -1;
