@@ -18,7 +18,7 @@ public class NetworkRemote {
     private static final int READ_TIMEOUT = 15;
 
     private static class LazyHolder {
-        public static final NetworkRemote INSTANCE = new NetworkRemote();
+        private static final NetworkRemote INSTANCE = new NetworkRemote();
     }
 
     public static NetworkRemote getInstance() {

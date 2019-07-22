@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class SingleLiveEvent<T> extends MutableLiveData<T> {
+class SingleLiveEvent<T> extends MutableLiveData<T> {
 
     private static final String TAG = "SingleLiveEvent";
 
@@ -26,12 +26,9 @@ public class SingleLiveEvent<T> extends MutableLiveData<T> {
         }
 
         // Observe the internal MutableLiveData
-        super.observe(Objects.requireNonNull(owner), new Observer<T>() {
-            @Override
-            public void onChanged(@Nullable T t) {
-                if (mPending.compareAndSet(true, false)) {
-                    observer.onChanged(t);
-                }
+        super.observe(Objects.requireNonNull(owner), t -> {
+            if (mPending.compareAndSet(true, false)) {
+                observer.onChanged(t);
             }
         });
     }

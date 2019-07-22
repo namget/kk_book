@@ -2,13 +2,13 @@ package com.namget.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class BookResponse {
     @SerializedName("meta")
-    Meta metaData;
+    private Meta metaData;
     @SerializedName("documents")
-    ArrayList<Book> results;
+    private List<Book> results;
 
     public Meta getMetaData() {
         return metaData;
@@ -18,11 +18,11 @@ public class BookResponse {
         this.metaData = metaData;
     }
 
-    public ArrayList<Book> getResults() {
+    public List<Book> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<Book> results) {
+    public void setResults(List<Book> results) {
         this.results = results;
     }
 }

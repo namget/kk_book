@@ -21,6 +21,7 @@
         android:padding="8dp">
 
         <ImageView
+            android:contentDescription="@string/second_item_description"
             android:id="@+id/bookImg"
             android:layout_width="150dp"
             android:layout_height="150dp"

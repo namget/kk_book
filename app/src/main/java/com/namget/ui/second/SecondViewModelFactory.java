@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.namget.data.source.BookDataSource;
 
-public class SecondViewModelFactory implements ViewModelProvider.Factory {
+class SecondViewModelFactory implements ViewModelProvider.Factory {
 
-    BookDataSource bookRepository;
+    private final BookDataSource bookRepository;
 
     SecondViewModelFactory(BookDataSource bookRepository) {
         this.bookRepository = bookRepository;

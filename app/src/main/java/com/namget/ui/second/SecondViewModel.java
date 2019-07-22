@@ -12,40 +12,42 @@ import com.namget.ui.base.DisposableViewModel;
 import com.namget.util.LogUtil;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class SecondViewModel extends DisposableViewModel {
 
-    private BookDataSource bookRepository;
-    private final MutableLiveData<ArrayList<Book>> bookList = new MutableLiveData<>();
+    private final BookDataSource bookRepository;
+    private final MutableLiveData<List<Book>> bookList = new MutableLiveData<>();
 
-    public LiveData<ArrayList<Book>> getBookList() {
+    LiveData<List<Book>> getBookList() {
         return bookList;
     }
 
     private final MutableLiveData<Boolean> isEnd = new MutableLiveData<>();
 
-    public LiveData<Boolean> getIsEnd() {
+    LiveData<Boolean> getIsEnd() {
         return isEnd;
     }
 
-    private MutableLiveData<Book> ItemClicked = new MutableLiveData<>();
+    private final MutableLiveData<Book> ItemClicked = new MutableLiveData<>();
 
-    public LiveData<Book> getItemClicked() {
+    LiveData<Book> getItemClicked() {
         return ItemClicked;
     }
 
-    private ArrayList<Book> bookDatas = new ArrayList<>();
-
+    private final List<Book> books = new ArrayList<>();
 
     public SecondViewModel(BookDataSource bookRepository) {
         this.bookRepository = bookRepository;
     }
 
-    public void searchList(String query, int page) {
+    void searchList(String query, int page) {
         isLoading.setValue(true);
         addDisposable(bookRepository.searchBook(query, page)
                 .map(bookResponse -> {
-                    ArrayList<Book> books = new ArrayList<>();
+                    List<Book> books = new ArrayList<>();
                     for (Book book : bookResponse.getResults()) {
                         book.setTitle(setFilteredTitle(book.getTitle()));
                         book.setSalePrice(setFilteredPrice(book.getPrice(), book.getSalePrice()));
@@ -55,17 +57,18 @@ public class SecondViewModel extends DisposableViewModel {
                     bookResponse.setResults(books);
                     return bookResponse;
                 })
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         response -> {
-                            bookDatas.addAll(response.getResults());
+                            books.addAll(response.getResults());
                             Meta meta = response.getMetaData();
-                            bookList.postValue(bookDatas);
-                            isEnd.postValue(meta.isEnd());
-                            isLoading.postValue(false);
+                            bookList.setValue(books);
+                            isEnd.setValue(meta.isEnd());
+                            isLoading.setValue(false);
                             LogUtil.e("test", "success");
                         },
                         onError -> {
-                            isLoading.postValue(false);
+                            isLoading.setValue(false);
                             LogUtil.e("test", "error", onError);
                         }
                 ));
@@ -77,20 +80,19 @@ public class SecondViewModel extends DisposableViewModel {
 
     private String setFilteredTitle(String title) {
         while (title.contains("(") && title.contains(")")) {
-            StringBuffer stringBuffer = new StringBuffer(title);
+            StringBuilder stringBuffer = new StringBuilder(title);
             stringBuffer.replace(title.indexOf("("), title.indexOf(")") + 1, "");
             title = stringBuffer.toString();
         }
         return title;
     }
 
-    private int setFilteredPrice(int price, int saledPrice) {
-//        LogUtil.e("test", "price : " + (price * 0.9) + "price2 : " + saledPrice + "price3 : " + ((price * 0.9) - saledPrice));
+    private int setFilteredPrice(int price, int discountedPrice) {
         //90퍼 - 판매가격 > 0 => price의 90퍼도 안된다.
-        if ((price * 0.9) - saledPrice > 0 && saledPrice > 0) {
-            saledPrice *= -1;
+        if ((price * 0.9) - discountedPrice > 0 && discountedPrice > 0) {
+            discountedPrice *= -1;
         }
-        return saledPrice;
+        return discountedPrice;
     }
 
 

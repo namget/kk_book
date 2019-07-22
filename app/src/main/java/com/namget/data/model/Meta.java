@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class Meta {
     @SerializedName("is_end")
-    boolean isEnd;
+    private boolean isEnd;
     @SerializedName("pageable_count")
-    int pageableCount;
+    private int pageableCount;
     @SerializedName("total_count")
-    int totalCount;
+    private int totalCount;
 
 
     public int getTotalCount() {

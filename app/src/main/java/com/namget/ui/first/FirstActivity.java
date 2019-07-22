@@ -3,11 +3,9 @@ package com.namget.ui.first;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.namget.R;
 import com.namget.data.model.Book;
 import com.namget.databinding.ActivityFirstBinding;
@@ -17,7 +15,6 @@ import com.namget.util.Constant;
 
 public class FirstActivity extends BaseActivity<ActivityFirstBinding> {
 
-    private FirstViewModelFactory firstViewModelFactory;
     private FirstViewModel firstViewModel;
 
     @Override
@@ -42,16 +39,17 @@ public class FirstActivity extends BaseActivity<ActivityFirstBinding> {
     }
 
     private void initViewModel() {
-        firstViewModelFactory = new FirstViewModelFactory();
-        firstViewModel = ViewModelProviders.of(this, firstViewModelFactory).get(FirstViewModel.class);
+        firstViewModel = ViewModelProviders.of(this).get(FirstViewModel.class);
     }
 
     private void observeData() {
         firstViewModel.getBooks().observe(this, list -> {
+            // 이건 비지니스 로직이라 ViewModel 에서 하는게 좋음 나라면 sum 데이터도 LiveData 로 ViewModel 에 둘듯
             int sum = 0;
             for (Book book : list) {
                 sum += book.getSalePrice();
             }
+            // 이것도 LiveData 로 ViewModel 에 두면 xml 에서 바인딩 가능
             binding.leftMoneyTxt.setText(String.format("%s원", String.valueOf(sum)));
         });
     }

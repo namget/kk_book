@@ -3,12 +3,10 @@ package com.namget.ui.second;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.namget.R;
 import com.namget.data.source.BookDataSource;
 import com.namget.data.source.BookRepository;
@@ -19,7 +17,6 @@ import com.namget.util.Constant;
 
 public class SecondActivity extends BaseActivity<ActivitySecondBinding> {
 
-    private SecondViewModelFactory secondViewModelFactory;
     private SecondViewModel secondViewModel;
     private BookDataSource bookRepository = BookRepository.getInstance();
     private String query;
@@ -61,11 +58,11 @@ public class SecondActivity extends BaseActivity<ActivitySecondBinding> {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 //최상단
-                if (recyclerView.canScrollVertically(1)) {
+                /*if (recyclerView.canScrollVertically(1)) {
 
-                }
+                }*/
                 //최하단
-                else if (recyclerView.canScrollVertically(-1)) {
+                if (recyclerView.canScrollVertically(-1)) {
                     if (recyclerView.getAdapter() != null && recyclerView.getAdapter().getItemCount() != 0) {
                         if (secondViewModel.getIsEnd().getValue() != null && !secondViewModel.getIsEnd().getValue()) {
                             secondViewModel.searchList(query, ++page);
@@ -78,7 +75,7 @@ public class SecondActivity extends BaseActivity<ActivitySecondBinding> {
     }
 
     private void initViewModel() {
-        secondViewModelFactory = new SecondViewModelFactory(bookRepository);
+        SecondViewModelFactory secondViewModelFactory = new SecondViewModelFactory(bookRepository);
         secondViewModel = ViewModelProviders.of(this, secondViewModelFactory).get(SecondViewModel.class);
     }
 

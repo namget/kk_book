@@ -2,14 +2,12 @@ package com.namget.ui.second.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.namget.R;
 import com.namget.data.model.Book;
 import com.namget.databinding.ItemBookBinding;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SecondAdapter extends ListAdapter<Book, SecondAdapter.MyViewHolder> {
-    private SecondViewModel secondViewModel;
+    private final SecondViewModel secondViewModel;
 
     public SecondAdapter(DiffUtil.ItemCallback<Book> diffUtil, SecondViewModel secondViewModel) {
         super(diffUtil);
@@ -27,17 +25,16 @@ public class SecondAdapter extends ListAdapter<Book, SecondAdapter.MyViewHolder>
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        ItemBookBinding binding;
+        private final ItemBookBinding binding;
 
         MyViewHolder(ItemBookBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public void bind(Book book,SecondViewModel secondViewModel) {
+        void bind(Book book, SecondViewModel secondViewModel) {
             binding.setBook(book);
             binding.setViewmodel(secondViewModel);
-            binding.executePendingBindings();
         }
     }
 
