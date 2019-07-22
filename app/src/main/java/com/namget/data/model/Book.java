@@ -1,10 +1,15 @@
 package com.namget.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Book {
+public class Book implements Parcelable {
     private String title;
     private String contents;
     private String url;
@@ -18,6 +23,7 @@ public class Book {
     private int salePrice;
     private String thumbnail;
     private String status;
+
 
     public String getTitle() {
         return title;
@@ -113,5 +119,67 @@ public class Book {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.title);
+        dest.writeString(this.contents);
+        dest.writeString(this.url);
+        dest.writeString(this.isbn);
+        dest.writeString(this.datetime);
+        dest.writeStringList(this.author);
+        dest.writeString(this.publisher);
+        dest.writeStringList(this.translators);
+        dest.writeInt(this.price);
+        dest.writeInt(this.salePrice);
+        dest.writeString(this.thumbnail);
+        dest.writeString(this.status);
+    }
+
+    public Book() {
+    }
+
+    protected Book(Parcel in) {
+        this.title = in.readString();
+        this.contents = in.readString();
+        this.url = in.readString();
+        this.isbn = in.readString();
+        this.datetime = in.readString();
+        this.author = in.createStringArrayList();
+        this.publisher = in.readString();
+        this.translators = in.createStringArrayList();
+        this.price = in.readInt();
+        this.salePrice = in.readInt();
+        this.thumbnail = in.readString();
+        this.status = in.readString();
+    }
+
+    public static final Parcelable.Creator<Book> CREATOR = new Parcelable.Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel source) {
+            return new Book(source);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if(obj instanceof  Book){
+            Book book = (Book) obj;
+            if((this.title.equals(book.title)) && (this.salePrice == book.salePrice) && (this.salePrice == book.salePrice)){
+                return true;
+            }
+        }
+        return false;
     }
 }

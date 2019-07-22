@@ -5,6 +5,10 @@
     <data>
 
         <variable
+            name="viewmodel"
+            type="com.namget.ui.second.SecondViewModel" />
+
+        <variable
             name="book"
             type="com.namget.data.model.Book" />
     </data>
@@ -12,6 +16,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="@{v-> viewmodel.ItemClick(v,book)}"
         android:padding="8dp">
 
         <ImageView
@@ -29,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:filteredText="@{book.title}"
+            android:text="@{book.title}"
             android:textColor="@android:color/black"
             android:textSize="15sp"
             android:textStyle="bold"

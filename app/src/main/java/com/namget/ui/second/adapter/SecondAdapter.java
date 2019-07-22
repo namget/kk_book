@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
@@ -12,11 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.namget.R;
 import com.namget.data.model.Book;
 import com.namget.databinding.ItemBookBinding;
+import com.namget.ui.second.SecondViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SecondAdapter extends ListAdapter<Book, SecondAdapter.MyViewHolder> {
+    private SecondViewModel secondviewModel;
 
-    public SecondAdapter(DiffUtil.ItemCallback<Book> diffUtil) {
+    public SecondAdapter(DiffUtil.ItemCallback<Book> diffUtil, SecondViewModel secondviewModel) {
         super(diffUtil);
+        this.secondviewModel = secondviewModel;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -29,7 +36,13 @@ public class SecondAdapter extends ListAdapter<Book, SecondAdapter.MyViewHolder>
 
         public void bind(Book book) {
             binding.setBook(book);
+            binding.executePendingBindings();
         }
+    }
+
+    @Override
+    public void submitList(@Nullable List<Book> list) {
+        super.submitList(list != null ? new ArrayList<>(list) : null);
     }
 
     @NonNull

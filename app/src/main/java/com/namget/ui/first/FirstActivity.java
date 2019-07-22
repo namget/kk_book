@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.namget.R;
-import com.namget.data.source.BookDataSource;
-import com.namget.data.source.BookRepository;
+import com.namget.data.model.Book;
 import com.namget.databinding.ActivityFirstBinding;
 import com.namget.ui.base.BaseActivity;
 import com.namget.ui.second.SecondActivity;
@@ -19,7 +19,6 @@ public class FirstActivity extends BaseActivity<ActivityFirstBinding> {
 
     private FirstViewModelFactory firstViewModelFactory;
     private FirstViewModel firstViewModel;
-    private BookDataSource bookRepository = BookRepository.getInstance();
 
     @Override
     protected int onLayoutId() {
@@ -35,6 +34,7 @@ public class FirstActivity extends BaseActivity<ActivityFirstBinding> {
     private void init() {
         initToolbar();
         initViewModel();
+        observeData();
     }
 
     private void initToolbar() {
@@ -42,8 +42,18 @@ public class FirstActivity extends BaseActivity<ActivityFirstBinding> {
     }
 
     private void initViewModel() {
-        firstViewModelFactory = new FirstViewModelFactory(bookRepository);
+        firstViewModelFactory = new FirstViewModelFactory();
         firstViewModel = ViewModelProviders.of(this, firstViewModelFactory).get(FirstViewModel.class);
+    }
+
+    private void observeData() {
+        firstViewModel.getBooks().observe(this, list -> {
+            int sum = 0;
+            for (Book book : list) {
+                sum += book.getSalePrice();
+            }
+            binding.leftMoneyTxt.setText(String.valueOf(sum));
+        });
     }
 
     @Override
@@ -58,7 +68,7 @@ public class FirstActivity extends BaseActivity<ActivityFirstBinding> {
             public boolean onQueryTextSubmit(String query) {
                 Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
                 intent.putExtra(Constant.DATA, query);
-                startActivity(intent);
+                startActivityForResult(intent, Constant.DATA_REQ_CODE);
                 return true;
             }
 
@@ -69,5 +79,17 @@ public class FirstActivity extends BaseActivity<ActivityFirstBinding> {
         });
 
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constant.DATA_REQ_CODE) {
+            if (resultCode == RESULT_OK) {
+                if (data != null && data.hasExtra(Constant.RESULT_DATA)) {
+                    firstViewModel.putData(data.getParcelableExtra(Constant.RESULT_DATA));
+                }
+            }
+        }
     }
 }

@@ -1,13 +1,35 @@
 package com.namget.ui.first;
 
-import com.namget.data.source.BookDataSource;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import com.namget.data.model.Book;
 import com.namget.ui.base.DisposableViewModel;
 
-public class FirstViewModel extends DisposableViewModel {
-    private BookDataSource bookRepository;
+import java.util.ArrayList;
 
-    public FirstViewModel(BookDataSource bookRepository) {
-        this.bookRepository = bookRepository;
+public class FirstViewModel extends DisposableViewModel {
+
+    private MutableLiveData<ArrayList<Book>> books = new MutableLiveData<>();
+    ArrayList<Book> bookList = new ArrayList<>();
+    public LiveData<ArrayList<Book>> getBooks() {
+        return books;
+    }
+
+    private boolean isOverlap(Book book){
+        for(Book b : bookList){
+            if(b.equals(book)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void putData(Book book){
+        if(!isOverlap(book)){
+            bookList.add(book);
+            books.setValue(bookList);
+        }
     }
 
 }
