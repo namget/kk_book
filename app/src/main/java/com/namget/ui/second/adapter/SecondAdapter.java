@@ -19,11 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SecondAdapter extends ListAdapter<Book, SecondAdapter.MyViewHolder> {
-    private SecondViewModel secondviewModel;
+    private SecondViewModel secondViewModel;
 
-    public SecondAdapter(DiffUtil.ItemCallback<Book> diffUtil, SecondViewModel secondviewModel) {
+    public SecondAdapter(DiffUtil.ItemCallback<Book> diffUtil, SecondViewModel secondViewModel) {
         super(diffUtil);
-        this.secondviewModel = secondviewModel;
+        this.secondViewModel = secondViewModel;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -34,8 +34,9 @@ public class SecondAdapter extends ListAdapter<Book, SecondAdapter.MyViewHolder>
             this.binding = binding;
         }
 
-        public void bind(Book book) {
+        public void bind(Book book,SecondViewModel secondViewModel) {
             binding.setBook(book);
+            binding.setViewmodel(secondViewModel);
             binding.executePendingBindings();
         }
     }
@@ -54,6 +55,6 @@ public class SecondAdapter extends ListAdapter<Book, SecondAdapter.MyViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.bind(getItem(position));
+        holder.bind(getItem(position), secondViewModel);
     }
 }

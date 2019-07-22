@@ -84,7 +84,7 @@ public class SecondViewModel extends DisposableViewModel {
     private int setFilteredPrice(int price, int saledPrice) {
         LogUtil.e("test", "price : " + (price * 0.9) + "price2 : " + saledPrice + "price3 : " + ((price * 0.9) - saledPrice));
         //90퍼 - 판매가격 > 0 => price의 90퍼도 안된다.
-        if ((price * 0.9) - saledPrice > 0) {
+        if ((price * 0.9) - saledPrice > 0 && saledPrice > 0) {
             saledPrice *= -1;
         }
         return saledPrice;

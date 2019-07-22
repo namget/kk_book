@@ -52,7 +52,7 @@ public class FirstActivity extends BaseActivity<ActivityFirstBinding> {
             for (Book book : list) {
                 sum += book.getSalePrice();
             }
-            binding.leftMoneyTxt.setText(String.valueOf(sum));
+            binding.leftMoneyTxt.setText(String.format("%s원", String.valueOf(sum)));
         });
     }
 
