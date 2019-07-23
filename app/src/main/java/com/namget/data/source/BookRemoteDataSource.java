@@ -21,7 +21,6 @@ public class BookRemoteDataSource implements BookDataSource {
         return NetworkRemote.getInstance()
                 .getApiService()
                 .searchBook("accuracy", "title", 10, query, page)
-//                .map(BookResponse)
                 .subscribeOn(Schedulers.io());
     }
 }

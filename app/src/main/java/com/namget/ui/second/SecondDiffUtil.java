@@ -1,43 +1,38 @@
 package com.namget.ui.second;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+
 import com.namget.data.model.Book;
 
-class SecondDiffUtil extends DiffUtil.Callback {
+import java.util.List;
 
+class SecondDiffUtil extends DiffUtil.Callback {
+    private final List<Book> oldBook;
+    private final List<Book> newBook;
+
+    SecondDiffUtil(List<Book> oldBook, List<Book> newBook) {
+        this.oldBook = oldBook;
+        this.newBook = newBook;
+    }
 
     @Override
     public int getOldListSize() {
-        return 0;
+        return oldBook.size();
     }
 
     @Override
     public int getNewListSize() {
-        return 0;
+        return newBook.size();
     }
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return false;
+        return oldBook.get(oldItemPosition).getTitle().equals(newBook.get(newItemPosition).getTitle());
     }
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        return false;
+        return oldBook.get(oldItemPosition).equals(newBook.get(newItemPosition));
     }
 
-    @Override
-    public boolean areItemsTheSame(@NonNull Book oldItem, @NonNull Book newItem) {
-        return ((oldItem.getTitle().equals(newItem.getTitle()))
-                && (oldItem.getSalePrice() == (newItem.getSalePrice()))
-                && (oldItem.getPrice() == (newItem.getPrice())));
-    }
-
-    @Override
-    public boolean areContentsTheSame(@NonNull Book oldItem, @NonNull Book newItem) {
-        return ((oldItem.getTitle().equals(newItem.getTitle()))
-                && (oldItem.getSalePrice() == (newItem.getSalePrice()))
-                && (oldItem.getPrice() == (newItem.getPrice())));
-    }
 }
