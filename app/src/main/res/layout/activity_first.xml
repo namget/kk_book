@@ -39,7 +39,7 @@
             android:id="@+id/leftMoneyTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/zero_won_text"
+            android:text="@{String.format(@string/won,viewmodel.totalPrice)}"
             android:textColor="@android:color/black"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"

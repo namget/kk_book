@@ -2,12 +2,11 @@ package com.namget.ui.second.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.namget.R;
 import com.namget.data.model.Book;
 import com.namget.databinding.ItemBookBinding;
@@ -16,11 +15,13 @@ import com.namget.ui.second.SecondViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SecondAdapter extends ListAdapter<Book, SecondAdapter.MyViewHolder> {
+
+public class SecondAdapter extends RecyclerView.Adapter<SecondAdapter.MyViewHolder> {
+    private List<Book> list = new ArrayList<>();
     private final SecondViewModel secondViewModel;
 
-    public SecondAdapter(DiffUtil.ItemCallback<Book> diffUtil, SecondViewModel secondViewModel) {
-        super(diffUtil);
+
+    public SecondAdapter(SecondViewModel secondViewModel) {
         this.secondViewModel = secondViewModel;
     }
 
@@ -38,9 +39,14 @@ public class SecondAdapter extends ListAdapter<Book, SecondAdapter.MyViewHolder>
         }
     }
 
+    public void updateList(List<Book> newList) {
+        list.addAll(newList);
+        notifyItemRangeChanged(list.size(), newList.size());
+    }
+
     @Override
-    public void submitList(@Nullable List<Book> list) {
-        super.submitList(list != null ? new ArrayList<>(list) : null);
+    public int getItemCount() {
+        return list.size();
     }
 
     @NonNull
@@ -52,6 +58,6 @@ public class SecondAdapter extends ListAdapter<Book, SecondAdapter.MyViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.bind(getItem(position), secondViewModel);
+        holder.bind(list.get(position), secondViewModel);
     }
 }

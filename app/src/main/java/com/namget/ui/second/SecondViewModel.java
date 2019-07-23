@@ -6,10 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.namget.data.model.Book;
-import com.namget.data.model.BookResponse;
 import com.namget.data.source.BookDataSource;
 import com.namget.ui.base.DisposableViewModel;
 import com.namget.util.LogUtil;
+import com.namget.SingleLiveEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +17,14 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class SecondViewModel extends DisposableViewModel {
+    public SecondViewModel(BookDataSource bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     private final BookDataSource bookRepository;
     private final MutableLiveData<List<Book>> bookList = new MutableLiveData<>();
 
-    LiveData<List<Book>> getBookList() {
+    public LiveData<List<Book>> getBookList() {
         return bookList;
     }
 
@@ -31,7 +34,7 @@ public class SecondViewModel extends DisposableViewModel {
         return isEnd;
     }
 
-    private final MutableLiveData<Book> ItemClicked = new MutableLiveData<>();
+    private final SingleLiveEvent<Book> ItemClicked = new SingleLiveEvent<>();
 
     LiveData<Book> getItemClicked() {
         return ItemClicked;
@@ -39,20 +42,14 @@ public class SecondViewModel extends DisposableViewModel {
 
     private final List<Book> books = new ArrayList<>();
 
-    public SecondViewModel(BookDataSource bookRepository) {
-        this.bookRepository = bookRepository;
-    }
-
     void searchList(String query, int page) {
         isLoading.setValue(true);
         addDisposable(bookRepository.searchBook(query, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         response -> {
-                            books.addAll(response.toBookList());
-                            BookResponse.Meta meta = response.getMetaData();
-                            bookList.setValue(books);
-                            isEnd.setValue(meta.isEnd());
+                            isEnd.setValue(response.first);
+                            bookList.setValue(response.second);
                             isLoading.setValue(false);
                             LogUtil.e("test", "success");
                         },

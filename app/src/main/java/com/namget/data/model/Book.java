@@ -3,49 +3,44 @@ package com.namget.data.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.Nullable;
-
-import com.google.gson.annotations.SerializedName;
-
 public class Book implements Parcelable {
-    private String title;
-    private int price;
-    @SerializedName("sale_price")
-    private int salePrice;
-    private String thumbnail;
+    private final String title;
+    private final int price;
+    private final int salePrice;
+    private final String thumbnail;
+
+    public Book(String title, int price, int salePrice,  String thumbnail) {
+        this.title = title;
+        this.price = price;
+        this.salePrice = salePrice;
+        this.thumbnail = thumbnail;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", price=" + price +
+                ", salePrice=" + salePrice +
+                ", thumbnail='" + thumbnail + '\'' +
+                '}';
+    }
 
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public int getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public int getSalePrice() {
         return salePrice;
-    }
-
-    public void setSalePrice(int salePrice) {
-        this.salePrice = salePrice;
     }
 
     public String getThumbnail() {
         return thumbnail;
     }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
 
     @Override
     public int describeContents() {
@@ -58,9 +53,6 @@ public class Book implements Parcelable {
         dest.writeInt(this.price);
         dest.writeInt(this.salePrice);
         dest.writeString(this.thumbnail);
-    }
-
-    public Book() {
     }
 
     protected Book(Parcel in) {

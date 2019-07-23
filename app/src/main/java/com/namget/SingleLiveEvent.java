@@ -1,4 +1,4 @@
-package com.namget.util;
+package com.namget;
 
 import android.util.Log;
 
@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-class SingleLiveEvent<T> extends MutableLiveData<T> {
+public class SingleLiveEvent<T> extends MutableLiveData<T> {
 
     private static final String TAG = "SingleLiveEvent";
 

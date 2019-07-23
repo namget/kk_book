@@ -1,5 +1,7 @@
 package com.namget.data.model;
 
+import android.util.Pair;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -7,32 +9,17 @@ import java.util.List;
 
 public class BookResponse {
     @SerializedName("meta")
-    private Meta metaData;
+    private Meta meta;
     @SerializedName("documents")
     private List<InnerBook> results;
 
-    public Meta getMetaData() {
-        return metaData;
-    }
-
-    public void setMetaData(Meta metaData) {
-        this.metaData = metaData;
-    }
-
-    public List<InnerBook> getResults() {
-        return results;
-    }
-
-    public void setResults(List<InnerBook> results) {
-        this.results = results;
-    }
-
-    public List<Book> toBookList() {
+    public Pair<Boolean, List<Book>> toPairList() {
         List<Book> books = new ArrayList<>();
         for (InnerBook innerBook : this.results) {
             books.add(innerBook.toBookList());
         }
-        return books;
+        Pair<Boolean, List<Book>> pair = new Pair<>(this.meta.isEnd, books);
+        return pair;
     }
 
     static class InnerBook {
@@ -52,12 +39,10 @@ public class BookResponse {
         private String status;
 
         private Book toBookList() {
-            Book book = new Book();
-            book.setTitle(setFilteredTitle(this.title));
-            book.setPrice(this.price);
-            book.setSalePrice(setFilteredPrice(this.price, this.salePrice));
+            Book book = new Book(setFilteredTitle(this.title), this.price, setFilteredPrice(this.price, this.salePrice), this.thumbnail);
             return book;
         }
+
         private String setFilteredTitle(String title) {
             while (title.contains("(") && title.contains(")")) {
                 StringBuilder stringBuffer = new StringBuilder(title);
@@ -66,6 +51,7 @@ public class BookResponse {
             }
             return title;
         }
+
         private int setFilteredPrice(int price, int discountedPrice) {
             //90퍼 - 판매가격 > 0 => price의 90퍼도 안된다.
             if ((price * 0.9) - discountedPrice > 0 && discountedPrice > 0) {

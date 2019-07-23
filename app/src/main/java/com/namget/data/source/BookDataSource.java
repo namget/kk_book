@@ -1,8 +1,13 @@
 package com.namget.data.source;
 
-import com.namget.data.model.BookResponse;
+import android.util.Pair;
+
+import com.namget.data.model.Book;
+
+import java.util.List;
+
 import io.reactivex.Single;
 
 public interface BookDataSource {
-    Single<BookResponse> searchBook(String query, int page);
+    Single<Pair<Boolean, List<Book>>> searchBook(String query, int page);
 }
