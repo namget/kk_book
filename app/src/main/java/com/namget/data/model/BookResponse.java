@@ -18,8 +18,7 @@ public class BookResponse {
         for (InnerBook innerBook : this.results) {
             books.add(innerBook.toBookList());
         }
-        Pair<Boolean, List<Book>> pair = new Pair<>(this.meta.isEnd, books);
-        return pair;
+        return new Pair<>(this.meta.isEnd, books);
     }
 
     static class InnerBook {
@@ -39,8 +38,7 @@ public class BookResponse {
         private String status;
 
         private Book toBookList() {
-            Book book = new Book(setFilteredTitle(this.title), this.price, setFilteredPrice(this.price, this.salePrice), this.thumbnail);
-            return book;
+            return new Book(setFilteredTitle(this.title), this.price, setFilteredPrice(this.price, this.salePrice), this.thumbnail);
         }
 
         private String setFilteredTitle(String title) {

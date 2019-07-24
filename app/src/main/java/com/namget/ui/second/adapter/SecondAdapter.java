@@ -17,7 +17,7 @@ import java.util.List;
 
 
 public class SecondAdapter extends RecyclerView.Adapter<SecondAdapter.MyViewHolder> {
-    private List<Book> list = new ArrayList<>();
+    private final List<Book> list = new ArrayList<>();
     private final SecondViewModel secondViewModel;
 
 

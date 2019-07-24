@@ -5,13 +5,12 @@ import android.view.View;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.namget.SingleLiveEvent;
 import com.namget.data.model.Book;
 import com.namget.data.source.BookDataSource;
 import com.namget.ui.base.DisposableViewModel;
 import com.namget.util.LogUtil;
-import com.namget.SingleLiveEvent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -39,8 +38,6 @@ public class SecondViewModel extends DisposableViewModel {
     LiveData<Book> getItemClicked() {
         return ItemClicked;
     }
-
-    private final List<Book> books = new ArrayList<>();
 
     void searchList(String query, int page) {
         isLoading.setValue(true);

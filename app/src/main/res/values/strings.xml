@@ -6,7 +6,6 @@
     <string name="book_price">정가 :</string>
     <string name="book_sale_price">할인가 :</string>
     <string name="won">%s원</string>
-    <string name="zero_won_text">0원</string>
     <string name="no_result">검색결과가 없습니다.</string>
 
 
