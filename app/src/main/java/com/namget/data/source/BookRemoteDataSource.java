@@ -20,7 +20,7 @@ public class BookRemoteDataSource implements BookDataSource {
 
     //기본 생성자 제거
     private BookRemoteDataSource(){
-        throw new AssertionError();
+        throw new AssertionError("BookRemoteDataSource default constructor don't allow here");
     }
 
     static BookRemoteDataSource getInstance() {

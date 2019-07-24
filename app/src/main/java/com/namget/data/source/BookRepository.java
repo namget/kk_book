@@ -17,7 +17,7 @@ public class BookRepository implements BookDataSource {
 
     //기본 생성자 제거
     private BookRepository() {
-        throw new AssertionError();
+        throw new AssertionError("BookRepository default constructor don't allow here");
     }
 
     public static BookRepository getInstance() {

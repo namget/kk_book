@@ -10,7 +10,7 @@ public class GlideUtil {
 
     //기본생성자 방지
     private GlideUtil(){
-        throw new AssertionError();
+        throw new AssertionError("GlideUtil default constructor don't allow here");
     }
 
     public static void setGlide(ImageView imageView, String url) {

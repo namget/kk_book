@@ -8,7 +8,7 @@ public class LogUtil {
 
     //기본생성자 방지
     private LogUtil(){
-        throw new AssertionError();
+        throw new AssertionError("LogUtil default constructor don't allow here");
     }
 
     public static void e(String TAG , String message){

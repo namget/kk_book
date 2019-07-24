@@ -22,8 +22,8 @@ public class NetworkRemote {
     }
 
     //기본 생성자 제거
-    private NetworkRemote(){
-        throw new AssertionError();
+    private NetworkRemote() {
+        throw new AssertionError("NetworkRemote default constructor don't allow here");
     }
 
     public static NetworkRemote getInstance() {
