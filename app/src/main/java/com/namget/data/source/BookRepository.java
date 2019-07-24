@@ -16,9 +16,7 @@ public class BookRepository implements BookDataSource {
     }
 
     //기본 생성자 제거
-    private BookRepository() {
-        throw new AssertionError("BookRepository default constructor don't allow here");
-    }
+    private BookRepository() {}
 
     public static BookRepository getInstance() {
         return BookRepository.LazyHolder.INSTANCE;

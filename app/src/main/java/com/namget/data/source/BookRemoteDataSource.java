@@ -19,9 +19,7 @@ public class BookRemoteDataSource implements BookDataSource {
     }
 
     //기본 생성자 제거
-    private BookRemoteDataSource(){
-        throw new AssertionError("BookRemoteDataSource default constructor don't allow here");
-    }
+    private BookRemoteDataSource(){}
 
     static BookRemoteDataSource getInstance() {
         return BookRemoteDataSource.LazyHolder.INSTANCE;
