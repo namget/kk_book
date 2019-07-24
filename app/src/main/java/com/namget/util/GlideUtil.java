@@ -8,6 +8,8 @@ import com.namget.R;
 
 public class GlideUtil {
 
+    private GlideUtil(){}
+
     public static void setGlide(ImageView imageView, String url) {
         Glide.with(imageView.getContext())
                 .load(url)

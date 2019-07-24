@@ -5,6 +5,8 @@ import android.util.Log;
 import com.namget.BuildConfig;
 
 public class LogUtil {
+    private LogUtil(){}
+
     public static void e(String TAG , String message){
         if(BuildConfig.DEBUG){
             Log.e(TAG,message);
