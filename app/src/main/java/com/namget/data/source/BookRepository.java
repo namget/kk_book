@@ -9,10 +9,15 @@ import java.util.List;
 import io.reactivex.Single;
 
 public class BookRepository implements BookDataSource {
-    private BookDataSource bookRemoteDataSource = BookRemoteDataSource.getInstance();
+    private final BookDataSource bookRemoteDataSource = BookRemoteDataSource.getInstance();
 
     private static class LazyHolder {
         private static final BookRepository INSTANCE = new BookRepository();
+    }
+
+    //기본 생성자 제거
+    private BookRepository() {
+        throw new AssertionError();
     }
 
     public static BookRepository getInstance() {

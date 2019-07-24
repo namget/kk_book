@@ -18,6 +18,11 @@ public class BookRemoteDataSource implements BookDataSource {
         private static final BookRemoteDataSource INSTANCE = new BookRemoteDataSource();
     }
 
+    //기본 생성자 제거
+    private BookRemoteDataSource(){
+        throw new AssertionError();
+    }
+
     static BookRemoteDataSource getInstance() {
         return BookRemoteDataSource.LazyHolder.INSTANCE;
     }

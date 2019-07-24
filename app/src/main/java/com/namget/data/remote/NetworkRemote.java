@@ -21,6 +21,11 @@ public class NetworkRemote {
         private static final NetworkRemote INSTANCE = new NetworkRemote();
     }
 
+    //기본 생성자 제거
+    private NetworkRemote(){
+        throw new AssertionError();
+    }
+
     public static NetworkRemote getInstance() {
         return LazyHolder.INSTANCE;
     }

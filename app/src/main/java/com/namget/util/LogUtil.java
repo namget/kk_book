@@ -5,7 +5,11 @@ import android.util.Log;
 import com.namget.BuildConfig;
 
 public class LogUtil {
-    private LogUtil(){}
+
+    //기본생성자 방지
+    private LogUtil(){
+        throw new AssertionError();
+    }
 
     public static void e(String TAG , String message){
         if(BuildConfig.DEBUG){

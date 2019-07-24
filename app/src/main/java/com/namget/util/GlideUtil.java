@@ -8,7 +8,10 @@ import com.namget.R;
 
 public class GlideUtil {
 
-    private GlideUtil(){}
+    //기본생성자 방지
+    private GlideUtil(){
+        throw new AssertionError();
+    }
 
     public static void setGlide(ImageView imageView, String url) {
         Glide.with(imageView.getContext())
