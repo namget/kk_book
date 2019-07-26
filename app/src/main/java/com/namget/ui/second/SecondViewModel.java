@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.namget.SingleLiveEvent;
 import com.namget.data.model.Book;
-import com.namget.data.source.BookDataSource;
+import com.namget.data.source.BookRepository;
 import com.namget.ui.base.DisposableViewModel;
 import com.namget.util.LogUtil;
 
@@ -16,11 +16,11 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class SecondViewModel extends DisposableViewModel {
-    public SecondViewModel(BookDataSource bookRepository) {
+    public SecondViewModel(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
-    private final BookDataSource bookRepository;
+    private final BookRepository bookRepository;
     private final MutableLiveData<List<Book>> bookList = new MutableLiveData<>();
 
     public LiveData<List<Book>> getBookList() {

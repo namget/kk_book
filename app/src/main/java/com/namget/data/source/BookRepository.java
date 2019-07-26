@@ -8,22 +8,6 @@ import java.util.List;
 
 import io.reactivex.Single;
 
-public class BookRepository implements BookDataSource {
-    private final BookDataSource bookRemoteDataSource = BookRemoteDataSource.getInstance();
-
-    private static class LazyHolder {
-        private static final BookRepository INSTANCE = new BookRepository();
-    }
-
-    //기본 생성자 제거
-    private BookRepository() {}
-
-    public static BookRepository getInstance() {
-        return BookRepository.LazyHolder.INSTANCE;
-    }
-
-    @Override
-    public Single<Pair<Boolean, List<Book>>> searchBook(String query, int page) {
-        return bookRemoteDataSource.searchBook(query, page);
-    }
+public interface BookRepository {
+    Single<Pair<Boolean, List<Book>>> searchBook(String query, int page);
 }

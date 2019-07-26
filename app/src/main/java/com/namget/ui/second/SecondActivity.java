@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.namget.R;
 import com.namget.ViewModelFactory;
-import com.namget.data.source.BookDataSource;
 import com.namget.data.source.BookRepository;
+import com.namget.data.source.BookDataSource;
 import com.namget.databinding.ActivitySecondBinding;
 import com.namget.ui.base.BaseActivity;
 import com.namget.ui.second.adapter.SecondAdapter;
@@ -22,7 +22,7 @@ import com.namget.util.LogUtil;
 public class SecondActivity extends BaseActivity<ActivitySecondBinding> {
 
     private SecondViewModel secondViewModel;
-    private BookDataSource bookRepository = BookRepository.getInstance();
+    private BookRepository bookRepository = BookDataSource.getInstance();
     private String query;
     private SecondAdapter secondAdapter;
     private int page = 1;

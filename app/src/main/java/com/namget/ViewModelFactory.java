@@ -4,14 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.namget.data.source.BookDataSource;
+import com.namget.data.source.BookRepository;
 import com.namget.ui.second.SecondViewModel;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private final BookDataSource bookRepository;
+    private final BookRepository bookRepository;
 
-    public ViewModelFactory(BookDataSource bookRepository) {
+    public ViewModelFactory(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 

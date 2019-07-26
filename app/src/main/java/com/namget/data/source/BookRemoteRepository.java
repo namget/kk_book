@@ -11,18 +11,18 @@ import java.util.List;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 
-public class BookRemoteDataSource implements BookDataSource {
+public class BookRemoteRepository implements BookRepository {
 
 
     private static class LazyHolder {
-        private static final BookRemoteDataSource INSTANCE = new BookRemoteDataSource();
+        private static final BookRemoteRepository INSTANCE = new BookRemoteRepository();
     }
 
     //기본 생성자 제거
-    private BookRemoteDataSource(){}
+    private BookRemoteRepository(){}
 
-    static BookRemoteDataSource getInstance() {
-        return BookRemoteDataSource.LazyHolder.INSTANCE;
+    static BookRemoteRepository getInstance() {
+        return BookRemoteRepository.LazyHolder.INSTANCE;
     }
 
     @Override
